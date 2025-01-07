@@ -1,0 +1,72 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Password Manager API",
+      "version": "1.0.0",
+      "description": "An API for managing passwords securely"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "paths": {
+      "/password": {
+        "post": {
+          "summary": "Save a password",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "service": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["service", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Password saved successfully"
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get all stored passwords",
+          "responses": {
+            "200": {
+              "description": "List of passwords",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "service": { "type": "string" },
+                        "password": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        }
+      }
+    }
+  }  
